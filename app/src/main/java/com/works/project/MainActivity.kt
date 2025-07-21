@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.works.project.utils.Valids
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,7 +40,14 @@ class MainActivity : AppCompatActivity() {
     private fun login() {
         val email = l_txtEmail.text.toString()
         val password = l_txtPassword.text.toString()
-        Log.d("Login", "$email : $password")
+        val valid = Valids()
+        if (!valid.emailValids(email)) {
+            Toast.makeText(this, "Email format fail", Toast.LENGTH_SHORT).show()
+        }else if (password.length < 5) {
+            Toast.makeText(this, "Password format fail", Toast.LENGTH_SHORT).show()
+        }else {
+            Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
