@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ApiClient(val apiUrl: EApiUrl) {
+class ApiClient(val apiUrl: EApiUrl = EApiUrl.jsonBulut1) {
 
     val baseUrl1 = "https://jsonbulut.com/api/"
     val baseUrl2 = "https://jsonbulut.com/api/"
