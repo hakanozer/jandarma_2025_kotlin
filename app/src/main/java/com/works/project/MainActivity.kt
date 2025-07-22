@@ -63,16 +63,19 @@ class MainActivity : AppCompatActivity() {
                     val status = response.isSuccessful
                     if (status) {
                         val user = response.body()
-                        Log.d("Login User", user.toString())
+                        user?.let {
+                            Log.d("Token: ", it.data.access_token)
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Log.d("Login Fail", t.message.toString())
                 }
             })
 
         }
     }
+
 
 }

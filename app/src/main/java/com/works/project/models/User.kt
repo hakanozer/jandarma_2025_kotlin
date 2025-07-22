@@ -6,9 +6,9 @@ data class User (
 )
 
 data class Data (
-    val accessToken: String,
-    val tokenType: String,
-    val expiresIn: Long,
+    val access_token: String,
+    val token_type: String,
+    val expires_in: Long,
     val user: UserClass
 )
 
@@ -17,9 +17,9 @@ data class UserClass (
     val name: String,
     val email: String,
     val role: String,
-    val rememberToken: Any? = null,
-    val createdAt: String,
-    val updatedAt: String
+    val remember_token: Any? = null,
+    val created_at: String,
+    val updated_at: String
 )
 
 data class Meta (

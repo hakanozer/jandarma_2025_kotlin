@@ -19,7 +19,7 @@ class ApiClient(val apiUrl: EApiUrl = EApiUrl.jsonBulut1) {
             EApiUrl.jsonBulut1 -> baseUrl1
             EApiUrl.jsonBulut2 -> baseUrl2
         }
-        if (retrofit != null) {
+        if (retrofit == null) {
             retrofit = Retrofit
                 .Builder()
                 .baseUrl(baseUrl)
