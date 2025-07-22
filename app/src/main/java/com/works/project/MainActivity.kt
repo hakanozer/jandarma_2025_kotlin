@@ -13,7 +13,6 @@ import com.works.project.ijson.IUser
 import com.works.project.models.User
 import com.works.project.models.UserLogin
 import com.works.project.utils.ApiClient
-import com.works.project.utils.EApiUrl
 import com.works.project.utils.Valids
 import retrofit2.Call
 import retrofit2.Callback
