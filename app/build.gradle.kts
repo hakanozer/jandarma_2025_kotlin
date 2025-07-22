@@ -48,4 +48,5 @@ dependencies {
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:3.0-rc5")
 }

@@ -1,5 +1,7 @@
 package com.works.project
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -9,7 +11,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.works.project.ijson.IUser
+import com.works.project.controllers.ProductActivity
+import com.works.project.services.IUser
 import com.works.project.models.User
 import com.works.project.models.UserLogin
 import com.works.project.utils.ApiClient
@@ -26,10 +29,18 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var iUser: IUser
 
+    // shreprefances
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        // shreprefances
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+        editor = sharedPreferences.edit()
 
         iUser = ApiClient().getClient().create(IUser::class.java)
 
@@ -64,7 +75,16 @@ class MainActivity : AppCompatActivity() {
                     if (status) {
                         val user = response.body()
                         user?.let {
-                            Log.d("Token: ", it.data.access_token)
+                            editor.putString("access_token", it.data.access_token)
+                            editor.putString("name", it.data.user.name)
+                            editor.apply()
+                            // role redirect
+                            if(it.data.user.role == "admin") {
+                                // Sayfa Geçişleri
+                                val intent = Intent(this@MainActivity, ProductActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
                         }
                     }
                 }
