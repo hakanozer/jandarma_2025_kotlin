@@ -7,7 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.works.project.R
+import com.works.project.adampters.ProductAdapter
 import com.works.project.models.Product
 import com.works.project.models.Products
 import com.works.project.services.IProducts
@@ -20,11 +24,15 @@ class ProductActivity : AppCompatActivity() {
 
     var list:List<Product> = listOf()
     lateinit var iProducts: IProducts
+    lateinit var productList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_product)
+
+        productList = findViewById(R.id.productList)
+        productList.layoutManager = LinearLayoutManager(this)
 
         iProducts = ApiClient().getClient().create(IProducts::class.java)
         iProducts.getProducts(1, 10).enqueue(object:Callback<Products>{
@@ -33,7 +41,8 @@ class ProductActivity : AppCompatActivity() {
                     val products = response.body()
                     products?.let {
                         list = it.data
-                        Log.d("products", list.toString())
+                        productList.adapter = ProductAdapter(list)
+                        //productList.adapter?.notifyDataSetChanged()
                     }
                 }
             }
