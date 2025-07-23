@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                             editor.putString("name", it.data.user.name)
                             editor.apply()
                             // role redirect
-                            if(it.data.user.role == "admin") {
+                            if(it.data.user.role == "admin" || it.data.user.role == "user") {
                                 // Sayfa Geçişleri
                                 val intent = Intent(this@MainActivity, ProductActivity::class.java)
                                 startActivity(intent)
