@@ -39,6 +39,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="190₺" />
+
+                <Button
+                    android:id="@+id/pr_BtnInfo"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:text="!" />
             </LinearLayout>
         </LinearLayout>
 

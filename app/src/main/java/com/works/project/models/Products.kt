@@ -2,6 +2,11 @@ package com.works.project.models
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
+data class SingleProduct(
+    val meta: Meta,
+    val data: Product,
+)
+
 data class Products(
     val meta: ProMeta,
     val data: List<Product>,

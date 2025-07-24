@@ -53,4 +53,5 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-annotations:3.0-rc5")
 
     implementation("io.coil-kt:coil:2.4.0")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 }

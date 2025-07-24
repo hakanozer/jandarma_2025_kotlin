@@ -2,12 +2,16 @@ package com.works.project.controllers
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.works.project.R
+import com.works.project.adampters.ImageSliderAdapter
 import com.works.project.models.Product
+import com.works.project.models.SingleProduct
 import com.works.project.services.IProducts
 import com.works.project.utils.ApiClient
 import com.works.project.utils.AppConts
@@ -18,6 +22,10 @@ import retrofit2.Response
 class ProductDetailActivity : AppCompatActivity() {
 
     lateinit var iProducts: IProducts
+    lateinit var imageSlider: ViewPager2
+    lateinit var d_txtTitle: TextView
+    lateinit var d_txtPrice: TextView
+    lateinit var d_txtDetail: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,21 +33,36 @@ class ProductDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_product_detail)
 
         iProducts = ApiClient().getClient().create(IProducts::class.java)
+        imageSlider = findViewById(R.id.imageSlider)
+        d_txtTitle = findViewById(R.id.d_txtTitle)
+        d_txtPrice = findViewById(R.id.d_txtPrice)
+        d_txtDetail = findViewById(R.id.d_txtDetail)
 
         // get extra data
         val pid = intent.getLongExtra("pid", 0)
         pid?.let {
-            iProducts.getProductDetail(it).enqueue(object : Callback<Product> {
-                override fun onResponse(call: Call<Product>, response: Response<Product>) {
+            iProducts.getProductDetail(it).enqueue(object : Callback<SingleProduct> {
+                override fun onResponse(call: Call<SingleProduct>, response: Response<SingleProduct>) {
                     if (response.isSuccessful) {
-                        Log.d("Product Service DEtail", response.body().toString())
+                        // ?, !!, let
+                        response.body()?.let {
+                            val item = it.data
+                            val images = item.images
+                            val imageSliderAdapter = ImageSliderAdapter(images)
+                            imageSlider.adapter = imageSliderAdapter
+
+                            d_txtTitle.text = item.title
+                            d_txtPrice.text = "${item.price}₺"
+                            d_txtDetail.text = item.description
+                        }
+
                     }
                 }
 
-                override fun onFailure(call: Call<Product>, t: Throwable) {
+                override fun onFailure(call: Call<SingleProduct>, t: Throwable) {
                     TODO("Not yet implemented")
                 }
-            } )
+            })
         }
         Log.d("pid",  pid.toString())
         Log.d("Detail Product", AppConts.product.toString())
