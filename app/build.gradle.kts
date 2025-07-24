@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -54,4 +55,10 @@ dependencies {
 
     implementation("io.coil-kt:coil:2.4.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
+
+    val room_version = "2.6.1"
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
 }

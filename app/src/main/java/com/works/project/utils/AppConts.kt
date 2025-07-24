@@ -7,6 +7,7 @@ class AppConts {
     // static product
     companion object {
         var product: Product? = null
+        var role: String = "user"
     }
 
 }

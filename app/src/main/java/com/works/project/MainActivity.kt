@@ -11,11 +11,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.works.project.controllers.NoteActivity
 import com.works.project.controllers.ProductActivity
 import com.works.project.services.IUser
 import com.works.project.models.User
 import com.works.project.models.UserLogin
 import com.works.project.utils.ApiClient
+import com.works.project.utils.AppConts
 import com.works.project.utils.Valids
 import retrofit2.Call
 import retrofit2.Callback
@@ -78,12 +80,19 @@ class MainActivity : AppCompatActivity() {
                             editor.putString("access_token", it.data.access_token)
                             editor.putString("name", it.data.user.name)
                             editor.apply()
+                            AppConts.role = it.data.user.role
                             // role redirect
-                            if(it.data.user.role == "admin" || it.data.user.role == "user") {
+                            if(AppConts.role == "admin") {
                                 // Sayfa Geçişleri
                                 val intent = Intent(this@MainActivity, ProductActivity::class.java)
                                 startActivity(intent)
                                 finish()
+                            }else if(AppConts.role == "user") {
+                                val intent = Intent(this@MainActivity, NoteActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }else {
+                                Toast.makeText(this@MainActivity, "Yetkiniz yok", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
