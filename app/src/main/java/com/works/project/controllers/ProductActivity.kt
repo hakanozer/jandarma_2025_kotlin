@@ -3,6 +3,8 @@ package com.works.project.controllers
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -108,5 +110,22 @@ class ProductActivity : AppCompatActivity() {
         Log.d("Sıra", "6 - onDestroy: ")
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.product_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_profile -> {
+                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+            }
+            R.id.menu_customer -> {
+                Toast.makeText(this, "Customer", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 }

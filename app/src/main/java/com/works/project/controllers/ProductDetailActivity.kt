@@ -1,7 +1,9 @@
 package com.works.project.controllers
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,10 +34,16 @@ class ProductDetailActivity : AppCompatActivity() {
     lateinit var d_txtPrice: TextView
     lateinit var d_txtDetail: TextView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_product_detail)
+
+        // action bar back button
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // title change
+        supportActionBar?.title = "Product Detail"
 
         val data = utilApp.call()
         Log.d("datax", data)
@@ -81,5 +89,14 @@ class ProductDetailActivity : AppCompatActivity() {
             insets
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

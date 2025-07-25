@@ -40,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        // actionbar hidden
+        supportActionBar?.hide()
+
         // shreprefances
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         editor = sharedPreferences.edit()
