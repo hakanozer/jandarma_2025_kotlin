@@ -10,16 +10,21 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.works.project.R
 import com.works.project.adampters.ImageSliderAdapter
-import com.works.project.models.Product
 import com.works.project.models.SingleProduct
 import com.works.project.services.IProducts
 import com.works.project.utils.ApiClient
 import com.works.project.utils.AppConts
+import com.works.project.utils.UtilApp
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProductDetailActivity : AppCompatActivity() {
+
+    @Inject lateinit var utilApp: UtilApp
 
     lateinit var iProducts: IProducts
     lateinit var imageSlider: ViewPager2
@@ -31,6 +36,9 @@ class ProductDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_product_detail)
+
+        val data = utilApp.call()
+        Log.d("datax", data)
 
         iProducts = ApiClient().getClient().create(IProducts::class.java)
         imageSlider = findViewById(R.id.imageSlider)

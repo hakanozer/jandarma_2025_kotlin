@@ -29,10 +29,14 @@ class ProductActivity : AppCompatActivity() {
     lateinit var productList: RecyclerView
     lateinit var p_txtName: TextView
 
+    // 1. ilk çalışan method
+    // View katmanı hazırlanıyor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_product)
+
+        Log.d("Sıra", "1 - onCreate: ")
 
         p_txtName = findViewById(R.id.p_txtName)
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
@@ -66,6 +70,42 @@ class ProductActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    // 2. Sıra
+    // arkaplandan geri gelindiğinde çalışan method
+    // örn: kullanıcı geri geldiğinde çalışır
+    override fun onStart() {
+        super.onStart()
+        Log.d("Sıra", "2 - onStart: ")
+    }
+
+    // 3. Sıra
+    // activity başlatıldıktan sonra kullanıcı ile etkileşim kurulduğunda çalışan method
+    override fun onResume() {
+        super.onResume()
+        Log.d("Sıra", "3 - onResume: ")
+    }
+
+    // 4. sıra
+    // activiy kapatılma aşamasında çalıişan method
+    override fun onPause() {
+        super.onPause()
+        Log.d("Sıra", "4 - onPause: ")
+    }
+
+    // 5. sıra
+    // activity tamamen kapatıldığında çalışan method
+    override fun onStop() {
+        super.onStop()
+        Log.d("Sıra", "5 - onStop: ")
+    }
+
+    // 6. sıra
+    // activity finish olduğunda çalışan method
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("Sıra", "6 - onDestroy: ")
     }
 
 

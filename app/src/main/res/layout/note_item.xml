@@ -15,13 +15,6 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/pr_image"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -32,19 +25,14 @@
                     android:id="@+id/nr_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ürün Başlığı" />
+                    android:text="Note Başlığı" />
 
                 <TextView
                     android:id="@+id/nr_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="190₺" />
+                    android:text="Note Detay" />
 
-                <Button
-                    android:id="@+id/pr_BtnInfo"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    android:text="!" />
             </LinearLayout>
         </LinearLayout>
 

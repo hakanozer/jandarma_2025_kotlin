@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android") //
 }
 
 android {
@@ -59,6 +60,9 @@ dependencies {
     val room_version = "2.6.1"
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+    //annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    implementation("com.google.dagger:hilt-android:2.56.2") //
+    kapt("com.google.dagger:hilt-compiler:2.56.2") //
 
 }

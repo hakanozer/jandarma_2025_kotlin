@@ -14,8 +14,8 @@ class ProductItemHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
 
     fun bindtem(itemProduct: Product) {
 
-        val pr_title = itemView.findViewById<TextView>(R.id.pr_title)
-        val pr_price = itemView.findViewById<TextView>(R.id.pr_price)
+        val pr_title = itemView.findViewById<TextView>(R.id.nr_title)
+        val pr_price = itemView.findViewById<TextView>(R.id.nr_detail)
         val pr_image = itemView.findViewById<ImageView>(R.id.pr_image)
         val pr_BtnInfo = itemView.findViewById<Button>(R.id.pr_BtnInfo)
 

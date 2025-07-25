@@ -54,4 +54,17 @@
         android:text="Save"
         app:layout_constraintStart_toStartOf="@+id/n_txtDetail"
         app:layout_constraintTop_toBottomOf="@+id/n_txtDetail" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/noteList"
+        android:layout_width="409dp"
+        android:layout_height="524dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/n_btnSave" />
 </androidx.constraintlayout.widget.ConstraintLayout>

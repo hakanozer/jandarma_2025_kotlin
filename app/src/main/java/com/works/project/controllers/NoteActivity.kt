@@ -1,7 +1,6 @@
 package com.works.project.controllers
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -9,8 +8,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.works.project.R
+import com.works.project.adampters.NoteAdapter
 import com.works.project.configs.AppDatabase
 import com.works.project.dao.NoteDao
 import com.works.project.entities.Note
@@ -23,6 +25,7 @@ class NoteActivity : AppCompatActivity() {
     lateinit var n_txtTitle: EditText
     lateinit var n_txtDetail: EditText
     lateinit var n_btnSave: Button
+    lateinit var noteList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +35,8 @@ class NoteActivity : AppCompatActivity() {
         n_txtTitle = findViewById(R.id.n_txtTitle)
         n_txtDetail = findViewById(R.id.n_txtDetail)
         n_btnSave = findViewById(R.id.n_btnSave)
+        noteList = findViewById(R.id.noteList)
+        noteList.layoutManager = LinearLayoutManager(this)
 
         db = Room.databaseBuilder(this, AppDatabase::class.java, "project.db").allowMainThreadQueries().build()
         noteDao = db.noteDao()
@@ -54,10 +59,30 @@ class NoteActivity : AppCompatActivity() {
         val note = Note(title = title, content = content, date = date)
         val status = noteDao.insert(note)
         if (status > 0) {
+            noteList()
             Toast.makeText(this, "Note save success", Toast.LENGTH_SHORT).show()
+            n_txtTitle.setText("")
+            n_txtDetail.setText("")
+            n_txtTitle.requestFocus()
         }else {
             Toast.makeText(this, "Note save fail", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun noteList() {
+        val list = noteDao.getAll()
+        // conver MutableList
+        val items = mutableListOf<Note>()
+        for (item in list) {
+            items.add(item)
+        }
+        val adapter = NoteAdapter(items)
+        noteList.adapter = adapter
+    }
+
+    override fun onStart() {
+        super.onStart()
+        noteList()
     }
 
 }

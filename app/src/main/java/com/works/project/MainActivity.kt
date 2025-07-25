@@ -106,5 +106,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // 6. sıra
+    // activity finish olduğunda çalışan method
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("Sıra", "Login 6 - onDestroy: ")
+    }
 
 }
